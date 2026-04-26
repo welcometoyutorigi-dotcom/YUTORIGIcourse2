@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>講座・プログラム | YUTORIGI 〜遊鳥木〜</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Zen+Old+Mincho:wght@400;700&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sage: #8aaa87;
+  --sage-light: #b8d0b4;
+  --sage-pale: #e4efe2;
+  --cream: #f7f2ea;
+  --beige: #e8e0d0;
+  --sky: #a0c4d0;
+  --sky-light: #c8dfe8;
+  --sky-pale: #e6f2f6;
+  --gold: #c8a060;
+  --gold-light: #e8d0a0;
+  --gold-pale: #fdf6e8;
+  --purple: #a090c0;
+  --purple-pale: #f0edf8;
+  --purple-light: #d0c8e8;
+  --text: #4a4035;
+  --text-light: #8a7a6a;
+  --white: #fdfcfa;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Serif JP',serif;background:var(--white);color:var(--text);overflow-x:hidden;}
+
+/* ── HEADER ── */
+.site-header{text-align:center;padding:26px 24px 20px;background:linear-gradient(160deg,#eef6f8 0%,#f0f7ef 100%);position:relative;overflow:hidden;}
+.site-header .logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;letter-spacing:.22em;color:var(--text);}
+.site-header .logo-sub{font-size:.64rem;color:var(--text-light);letter-spacing:.28em;margin-top:2px;}
+.header-leaf{position:absolute;pointer-events:none;opacity:.1;}
+
+/* ── HERO ── */
+.hero{position:relative;padding:64px 24px 72px;text-align:center;background:linear-gradient(160deg,#f5f0f8 0%,#f0f7ef 40%,#e8f4f8 100%);overflow:hidden;}
+.hero-wc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+.hero-content{position:relative;z-index:2;max-width:580px;margin:0 auto;}
+.hero-badge{display:inline-block;background:linear-gradient(135deg,var(--purple-pale),var(--sage-pale));border:1.5px solid var(--purple-light);color:var(--purple);font-size:.66rem;letter-spacing:.25em;padding:5px 18px;border-radius:20px;margin-bottom:18px;animation:fadeUp .8s ease both;}
+.hero-title{font-family:'Zen Old Mincho',serif;font-size:clamp(1.5rem,5.5vw,2.4rem);font-weight:700;line-height:1.55;color:var(--text);margin-bottom:8px;animation:fadeUp .8s .15s ease both;}
+.hero-title-en{font-family:'Cormorant Garamond',serif;font-size:clamp(.9rem,3vw,1.2rem);font-weight:300;font-style:italic;color:var(--sage);letter-spacing:.14em;margin-bottom:22px;animation:fadeUp .8s .25s ease both;}
+.hero-line{width:44px;height:1.5px;background:linear-gradient(to right,var(--purple),var(--sage));margin:0 auto 22px;animation:fadeUp .8s .3s ease both;}
+.hero-copy{font-size:clamp(.82rem,2vw,.92rem);color:var(--text-light);line-height:2.6;letter-spacing:.06em;animation:fadeUp .8s .4s ease both;}
+.hero-scroll{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--sage);font-size:.58rem;letter-spacing:.22em;animation:fadeIn 1.5s 1s both;}
+.hero-scroll::after{content:'';width:1px;height:28px;background:linear-gradient(to bottom,var(--sage),transparent);animation:scrollLine 1.8s ease-in-out infinite;}
+
+/* ── SECTION BASE ── */
+.section-label{font-family:'Cormorant Garamond',serif;font-size:.66rem;letter-spacing:.42em;color:var(--sage);text-transform:uppercase;margin-bottom:8px;}
+.section-title{font-family:'Zen Old Mincho',serif;font-size:clamp(1.1rem,3vw,1.4rem);font-weight:700;line-height:1.8;color:var(--text);margin-bottom:6px;}
+.section-line{width:38px;height:1px;background:linear-gradient(to right,var(--purple),var(--sage));margin:0 auto 36px;}
+.leaf-deco{position:absolute;pointer-events:none;}
+
+/* ── LEAD ── */
+.lead-section{padding:64px 24px;background:var(--white);text-align:center;position:relative;overflow:hidden;}
+.lead-poem{max-width:500px;margin:32px auto 0;font-size:clamp(.82rem,2vw,.92rem);line-height:2.8;color:var(--text-light);border-left:2px solid var(--purple-light);padding-left:20px;text-align:left;}
+.lead-poem strong{color:var(--text);}
+
+/* ── COURSES ── */
+.courses-section{padding:64px 24px;background:linear-gradient(160deg,var(--cream) 0%,var(--white) 100%);position:relative;overflow:hidden;}
+.courses-inner{max-width:760px;margin:0 auto;}
+
+/* コースカード */
+.course-card{
+  border-radius:24px;overflow:hidden;
+  margin-bottom:28px;
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
+  transition:box-shadow .3s;
+}
+.course-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.12);}
+
+/* カードヘッダー（クリックで開閉） */
+.course-header{
+  padding:28px 32px;
+  cursor:pointer;
+  display:flex;align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  transition:opacity .2s;
+  user-select:none;
+}
+.course-header:hover{opacity:.92;}
+
+.course-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem;font-weight:300;
+  opacity:.35;letter-spacing:.05em;
+  flex-shrink:0;
+}
+.course-title-wrap{flex:1;}
+.course-label{font-size:.62rem;letter-spacing:.2em;margin-bottom:6px;display:block;}
+.course-name{font-family:'Zen Old Mincho',serif;font-size:clamp(.95rem,3vw,1.2rem);font-weight:700;line-height:1.5;}
+.course-name-en{font-family:'Cormorant Garamond',serif;font-size:.82rem;font-style:italic;opacity:.7;letter-spacing:.1em;margin-top:3px;display:block;}
+.course-arrow{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
+  transition:transform .35s ease;
+  border:1px solid rgba(255,255,255,.5);
+  background:rgba(255,255,255,.3);
+}
+.course-card.open .course-arrow{transform:rotate(180deg);}
+
+/* カード1：魂の覚醒 */
+.course-card-1 .course-header{background:linear-gradient(135deg,#e8e4f4,#f5f0f8);}
+.course-card-1 .course-label{color:var(--purple);}
+.course-card-1 .course-name{color:#6050a0;}
+.course-card-1 .course-arrow{color:var(--purple);}
+
+/* カード2：ライトワーカー */
+.course-card-2 .course-header{background:linear-gradient(135deg,var(--sage-pale),#eaf5e8);}
+.course-card-2 .course-label{color:var(--sage);}
+.course-card-2 .course-name{color:#4a7a50;}
+.course-card-2 .course-arrow{color:var(--sage);}
+
+/* カード3：リンパケア */
+.course-card-3 .course-header{background:linear-gradient(135deg,var(--sky-pale),#e8f5f8);}
+.course-card-3 .course-label{color:var(--sky);}
+.course-card-3 .course-name{color:#3a7888;}
+.course-card-3 .course-arrow{color:var(--sky);}
+
+/* カード詳細（開閉エリア） */
+.course-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .5s ease;
+  background:rgba(255,255,255,.95);
+  border:1px solid var(--beige);
+  border-top:none;
+  border-radius:0 0 24px 24px;
+}
+.course-card.open .course-body{max-height:2000px;}
+.course-body-inner{padding:32px 32px 28px;}
+
+/* 悩みリスト */
+.trouble-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.trouble-item{background:var(--cream);border-radius:10px;padding:10px 16px;font-size:.78rem;line-height:1.9;color:var(--text-light);border-left:3px solid;}
+.course-card-1 .trouble-item{border-left-color:var(--purple-light);}
+.course-card-2 .trouble-item{border-left-color:var(--sage-light);}
+.course-card-3 .trouble-item{border-left-color:var(--sky-light);}
+
+/* ステップ */
+.steps{display:flex;flex-direction:column;gap:14px;margin-bottom:24px;}
+.step-row{display:flex;gap:14px;align-items:flex-start;}
+.step-badge{
+  min-width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:.82rem;
+  color:white;flex-shrink:0;margin-top:2px;
+}
+.course-card-1 .step-badge{background:var(--purple);}
+.course-card-2 .step-badge{background:var(--sage);}
+.course-card-3 .step-badge{background:var(--sky);}
+.step-text{font-size:.8rem;line-height:2;color:var(--text-light);}
+.step-text strong{color:var(--text);}
+
+/* こんな方に */
+.fit-box{background:var(--cream);border-radius:14px;padding:20px 22px;margin-bottom:24px;}
+.fit-box h4{font-family:'Zen Old Mincho',serif;font-size:.86rem;color:var(--text);margin-bottom:12px;}
+.fit-items{display:flex;flex-direction:column;gap:7px;}
+.fit-item{font-size:.78rem;color:var(--text-light);line-height:1.8;}
+
+/* 申し込みボタン */
+.course-cta{text-align:center;padding-top:8px;}
+.course-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 32px;border-radius:50px;
+  font-family:'Noto Serif JP',serif;font-size:.82rem;
+  letter-spacing:.1em;text-decoration:none;
+  transition:all .3s;
+}
+.course-card-1 .course-btn{background:linear-gradient(135deg,var(--purple),#7860b0);color:white;box-shadow:0 5px 18px rgba(160,144,192,.35);}
+.course-card-1 .course-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(160,144,192,.48);}
+.course-card-2 .course-btn{background:linear-gradient(135deg,var(--sage),#6a9067);color:white;box-shadow:0 5px 18px rgba(138,170,135,.35);}
+.course-card-2 .course-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(138,170,135,.48);}
+.course-card-3 .course-btn{background:linear-gradient(135deg,var(--sky),#70a0b0);color:white;box-shadow:0 5px 18px rgba(160,196,208,.35);}
+.course-card-3 .course-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(160,196,208,.48);}
+.course-note{font-size:.7rem;color:var(--text-light);margin-top:10px;line-height:1.9;}
+
+/* ── LINE CTA ── */
+.cta-section{padding:64px 24px;background:linear-gradient(160deg,#f0edf8 0%,#f0f8ef 100%);text-align:center;position:relative;overflow:hidden;}
+.cta-box{max-width:520px;margin:0 auto;background:rgba(255,255,255,.82);border-radius:22px;padding:36px 28px;border:1px solid var(--purple-light);}
+.cta-box p{font-size:.82rem;color:var(--text-light);line-height:2.3;margin-bottom:22px;}
+.cta-box strong{color:var(--text);}
+.line-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#06c755,#04a845);color:white;padding:14px 32px;border-radius:50px;font-size:.82rem;letter-spacing:.08em;text-decoration:none;box-shadow:0 5px 16px rgba(6,199,85,.26);transition:all .3s;}
+.line-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(6,199,85,.38);}
+
+/* ── FOOTER ── */
+footer{padding:36px 24px;background:linear-gradient(160deg,#e4efe2,#e2eef5);text-align:center;position:relative;overflow:hidden;}
+footer .logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;letter-spacing:.22em;color:var(--text);margin-bottom:3px;}
+footer .logo-jp{font-size:.64rem;color:var(--text-light);letter-spacing:.28em;margin-bottom:12px;}
+footer p{font-size:.65rem;color:var(--text-light);line-height:2;}
+footer a{color:var(--sage);text-decoration:none;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scrollLine{0%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1;transform:scaleY(1)}100%{opacity:0}}
+.fade-in-up{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+.fade-in-up.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:540px){
+  .course-header{padding:22px 20px;}
+  .course-body-inner{padding:24px 18px 20px;}
+  .course-num{font-size:1.6rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ ヘッダー ══ -->
+<header class="site-header">
+  <svg class="header-leaf" style="top:-5px;right:-18px;width:120px;transform:rotate(5deg)" viewBox="0 0 160 250">
+    <path d="M80,0 C80,0 145,62 128,155 C111,248 22,260 22,260 C22,260 4,158 46,96 C62,46 80,0 80,0Z" fill="#9aad97"/>
+    <line x1="80" y1="14" x2="60" y2="235" stroke="#7a9877" stroke-width="2" opacity=".6"/>
+  </svg>
+  <p class="logo">YUTORIGI</p>
+  <p class="logo-sub">〜 遊 鳥 木 〜　ヒーリング ＆ リラクゼーションサロン</p>
+</header>
+
+<!-- ══ ヒーロー ══ -->
+<section class="hero">
+  <svg class="hero-wc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" preserveAspectRatio="xMidYMid slice">
+    <ellipse cx="60" cy="80" rx="170" ry="135" fill="rgba(180,160,210,.2)" transform="rotate(-12,60,80)"/>
+    <ellipse cx="740" cy="400" rx="180" ry="140" fill="rgba(155,205,222,.18)" transform="rotate(15,740,400)"/>
+    <ellipse cx="75" cy="400" rx="150" ry="115" fill="rgba(205,228,160,.18)" transform="rotate(-8,75,400)"/>
+    <ellipse cx="710" cy="55" rx="120" ry="95" fill="rgba(180,160,210,.15)" transform="rotate(10,710,55)"/>
+    <g opacity=".1" transform="translate(645,0)">
+      <path d="M70,0 C70,0 125,55 110,135 C95,215 18,226 18,226 C18,226 2,140 38,84 C54,42 70,0 70,0Z" fill="#a090c0"/>
+      <line x1="70" y1="12" x2="54" y2="204" stroke="#8070a0" stroke-width="1.8" opacity=".6"/>
+      <line x1="64" y1="54" x2="36" y2="90" stroke="#8070a0" stroke-width="1.4" opacity=".5"/>
+    </g>
+    <g opacity=".08" transform="translate(-15,580) rotate(168)">
+      <path d="M70,0 C70,0 125,55 110,135 C95,215 18,226 18,226 C18,226 2,140 38,84 C54,42 70,0 70,0Z" fill="#9aad97"/>
+    </g>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-badge">✨ YUTORIGI 講座・プログラム</div>
+    <h1 class="hero-title">あなたの才能を開花させる<br>3つのプログラム</h1>
+    <p class="hero-title-en">Learning &amp; Growth Programs</p>
+    <div class="hero-line"></div>
+    <p class="hero-copy">
+      自分を整え、誰かの光になる。<br>
+      心と身体の両方からアプローチする<br>
+      YUTORIGIだからこそできる学びの場
+    </p>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- ══ リード ══ -->
+<section class="lead-section">
+  <svg class="leaf-deco" style="top:-8px;right:-22px;width:200px;opacity:.09;transform:rotate(5deg)" viewBox="0 0 160 250">
+    <path d="M80,0 C80,0 145,62 128,155 C111,248 22,260 22,260 C22,260 4,158 46,96 C62,46 80,0 80,0Z" fill="#a090c0"/>
+    <line x1="80" y1="14" x2="60" y2="235" stroke="#8070a0" stroke-width="2" opacity=".6"/>
+    <line x1="74" y1="60" x2="40" y2="100" stroke="#8070a0" stroke-width="1.5" opacity=".5"/>
+  </svg>
+  <p class="section-label fade-in-up">Message</p>
+  <h2 class="section-title fade-in-up">学ぶ理由は、あなたの中にある</h2>
+  <div class="section-line fade-in-up"></div>
+  <div class="lead-poem fade-in-up">
+    「わかっているのに、動けない」<br>
+    「癒されたのに、また元に戻ってしまう」<br>
+    「誰かの力になりたいけれど、自信がない」<br><br>
+    そんな気持ちを、一緒に解きほぐしましょう。<br>
+    心と身体の両方から整えることで<br>
+    あなた本来の輝きが、必ず開いていきます。
+  </div>
+</section>
+
+<!-- ══ 3つの講座 ══ -->
+<section class="courses-section">
+  <svg class="leaf-deco" style="top:0;right:-15px;width:170px;opacity:.07" viewBox="0 0 160 250">
+    <path d="M80,0 C80,0 145,62 128,155 C111,248 22,260 22,260 C22,260 4,158 46,96 C62,46 80,0 80,0Z" fill="#9aad97"/>
+  </svg>
+  <div class="courses-inner">
+    <div style="text-align:center;margin-bottom:44px;">
+      <p class="section-label">Programs</p>
+      <h2 class="section-title">3つのプログラム</h2>
+      <div class="section-line"></div>
+      <p style="font-size:.76rem;color:var(--text-light);line-height:2;margin-top:8px;">
+        タイトルをタップすると詳しい内容が表示されます
+      </p>
+    </div>
+
+
+    <!-- ▼▼▼ 講座① 魂の覚醒 ▼▼▼ -->
+    <div class="course-card course-card-1 fade-in-up" id="course1">
+      <div class="course-header" onclick="toggleCourse('course1')">
+        <div class="course-num">01</div>
+        <div class="course-title-wrap">
+          <span class="course-label">潜在意識・マインドブロック</span>
+          <div class="course-name">人生を変える<br>魂の覚醒 潜在意識メソッド</div>
+          <span class="course-name-en">Soul Awakening Method</span>
+        </div>
+        <div class="course-arrow">▼</div>
+      </div>
+      <div class="course-body">
+        <div class="course-body-inner">
+          <!-- キャッチ -->
+          <p style="font-size:.86rem;line-height:2.4;color:var(--text);margin-bottom:20px;font-family:'Zen Old Mincho',serif;">
+            「わかっているのに、動けない」は、今日で終わり。<br>
+            潜在意識の奥にあるブロックを浄化し、現実を劇的に動かします。
+          </p>
+
+          <!-- こんな悩みに -->
+          <h4 style="font-family:'Zen Old Mincho',serif;font-size:.86rem;color:var(--text);margin-bottom:10px;">こんなお悩みありませんか？</h4>
+          <div class="trouble-list">
+            <div class="trouble-item">セミナーやヒーリングを受けても、数日経つと元に戻ってしまう</div>
+            <div class="trouble-item">仕事・お金・子育ての悩みが、ブロックを外したつもりでも繰り返される</div>
+            <div class="trouble-item">「自分には価値がある」と思いたいのに、心の底では信じきれない</div>
+            <div class="trouble-item">現実を変えるための「具体的な一歩」が何かわからない</div>
+          </div>
+
+          <!-- 5つのステップ -->
+          <h4 style="font-family:'Zen Old Mincho',serif;font-size:.86rem;color:var(--text);margin:20px 0 12px;">独自の5ステップで、リバウンドなく変わる</h4>
+          <div class="steps">
+            <div class="step-row">
+              <div class="step-badge">1</div>
+              <p class="step-text"><strong>深層の掘り下げ</strong><br>独自の問いかけで、ブレーキの正体と「本当の望み」を特定します。</p>
+            </div>
+            <div class="step-row">
+              <div class="step-badge">2</div>
+              <p class="step-text"><strong>神域アクセス（浄化と注入）</strong><br>エネルギーでブロックをクレンズし、高次元のエネルギーを魂に満たします。</p>
+            </div>
+            <div class="step-row">
+              <div class="step-badge">3</div>
+              <p class="step-text"><strong>身体の確信（O-リング）</strong><br>変わったことを「肉体の反応」で確認。脳と細胞に書き換え完了を刻印。</p>
+            </div>
+            <div class="step-row">
+              <div class="step-badge">4</div>
+              <p class="step-text"><strong>体感の言語化</strong><br>変化した感覚を自分の言葉にして、新しいセルフイメージを固定します。</p>
+            </div>
+            <div class="step-row">
+              <div class="step-badge">5</div>
+              <p class="step-text"><strong>現実の定着（アンカリング・ノート）</strong><br>その日のうちに「新しい私」としての行動を予約し、現実を動かします。</p>
+            </div>
+          </div>
+
+          <!-- 3つのコース -->
+          <h4 style="font-family:'Zen Old Mincho',serif;font-size:.86rem;color:var(--text);margin:24px 0 12px;">3つのコース構成</h4>
+          <div class="steps">
+            <div class="step-row">
+              <div class="step-badge">S1</div>
+              <p class="step-text">
+                <strong>【STEP 1】セルフ・ケア・コース</strong><br>
+                〜日常の重荷を手放し、自分を整える基礎〜<br>
+                ・クイック・イメージ・シフト（日常のモヤモヤを瞬時に光へ還す技法）<br>
+                ・アンカリング・ノート（基礎編）：「心の浄化」と「豊かさの確認」で安心の周波数を定着させる
+              </p>
+            </div>
+            <div class="step-row">
+              <div class="step-badge">S2</div>
+              <p class="step-text">
+                <strong>【STEP 2】マインドブロック解放・コース</strong><br>
+                〜講師との伴走で、思考のクセを「成功脳」へ〜<br>
+                ・潜在意識の「神域」アクセスワーク（お金・仕事・子育てのブロックを根底から浄化）<br>
+                ・アンカリング・ノート（実践編）：思考のリバウンドを防ぎ、成功感覚を充填し行動へ繋げる
+              </p>
+            </div>
+            <div class="step-row">
+              <div class="step-badge">S3</div>
+              <p class="step-text">
+                <strong>【STEP 3】プロフェッショナル養成：魂の開花師・コース</strong><br>
+                〜宿命を解放し、他人の人生に光を灯す〜<br>
+                ・ソウル・ヒストリー・クリアリング（魂のルーツから続く因縁を浄化）<br>
+                ・セルフ・ラブ・アクティベーション（インナーチャイルドを癒やし自己愛を覚醒）<br>
+                ・身体の確信（O-リング）技術（変化を物理的に証明するプロの技）<br>
+                ・アンカリング・ノート（極意編）：相手の未来を「予祝」し変容をナビゲートする伴走スキル
+              </p>
+            </div>
+          </div>
+
+          <!-- こんな方に -->
+          <div class="fit-box">
+            <h4>こんな方におすすめです</h4>
+            <div class="fit-items">
+              <div class="fit-item">✨ 何度試しても現実が変わらないと感じている方</div>
+              <div class="fit-item">✨ お金・仕事・人間関係のループを断ち切りたい方</div>
+              <div class="fit-item">✨ 自分や周りの人を根本から変えるセッション力を身につけたい方</div>
+            </div>
+          </div>
+
+          <!-- ボタン -->
+          <div class="course-cta">
+            <!-- ▼ 説明会フォームのURLができたらここに入れてください ▼ -->
+            <a href="https://script.google.com/macros/s/AKfycbzPDUjvR34XN0ZSNZ-ot9tY77xHcnA5kxIuJw_lT_8ShoQtm_MGPEGdIBps1RUqfcBt/exec" target="_blank" class="course-btn">
+              📝 説明会に申し込む
+            </a>
+            <p class="course-note">
+              ※ 料金・日程は説明会にてご案内します<br>
+              まずはお気軽にご相談ください😊
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ▲▲▲ 講座①ここまで ▲▲▲ -->
+
+
+    <!-- ▼▼▼ 講座② ライトワーカー ▼▼▼ -->
+    <div class="course-card course-card-2 fade-in-up" id="course2">
+      <div class="course-header" onclick="toggleCourse('course2')">
+        <div class="course-num">02</div>
+        <div class="course-title-wrap">
+          <span class="course-label">タロット・数秘・オラクル・エネルギーワーク</span>
+          <div class="course-name">ライトワーカー・プログラム</div>
+          <span class="course-name-en">Light Worker Program</span>
+        </div>
+        <div class="course-arrow">▼</div>
+      </div>
+      <div class="course-body">
+        <div class="course-body-inner">
+          <p style="font-size:.86rem;line-height:2.4;color:var(--text);margin-bottom:20px;font-family:'Zen Old Mincho',serif;">
+            地に足をつけて天と繋がる。<br>
+            現代の叡智と巫女の精神が交差する、唯一無二の覚醒プログラム。
+          </p>
+
+          <h4 style="font-family:'Zen Old Mincho',serif;font-size:.86rem;color:var(--text);margin-bottom:10px;">このプログラムの3つの特徴</h4>
+          <div class="trouble-list">
+            <div class="trouble-item">🌿 確かなメソッド（基盤）：意識の仕組み・エネルギーの法則を論理的に学ぶ</div>
+            <div class="trouble-item">⛩️ 巫女の精神（在り方）：日本人の美しい在り方を大切にした学び</div>
+            <div class="trouble-item">🏠 リアルな日常への応用：会社員・育児・副業の中でも使えるスピリチュアル</div>
+          </div>
+
+          <!-- カリキュラム -->
+          <h4 style="font-family:'Zen Old Mincho',serif;font-size:.86rem;color:var(--text);margin:20px 0 12px;">カリキュラム</h4>
+          <div class="steps">
+            <div class="step-row">
+              <div class="step-badge">1</div>
+              <p class="step-text"><strong>ライトワーカー・ベーシック講座（全2回）</strong><br>意識の土台を築く「お話の講座」。目に見えない世界の仕組みを論理的に学びます。自分と向き合うとはどういうことか？を体感し、揺るぎない自分軸を構築します。</p>
+            </div>
+            <div class="step-row">
+              <div class="step-badge">2</div>
+              <p class="step-text"><strong>ライトワーカー養成マスター講座（全8回）</strong><br>タロット・数秘・オラクルカードといった多様なツールを使いこなし、自分や他人のエネルギーを整え読み解くための具体的な技術を習得します。</p>
+            </div>
+          </div>
+
+          <!-- こんな方に -->
+          <div class="fit-box">
+            <h4>こんな方におすすめです</h4>
+            <div class="fit-items">
+              <div class="fit-item">✨ タロット・数秘を本格的に学んでセッションできるようになりたい方</div>
+              <div class="fit-item">✨ スピリチュアルを副業・仕事にしていきたい方</div>
+              <div class="fit-item">✨ 西洋的な叡智と日本の精神性を両方学びたい方</div>
+            </div>
+          </div>
+
+          <div class="course-cta">
+            <!-- ▼ 説明会フォームのURLができたらここに入れてください ▼ -->
+            <a href="https://script.google.com/macros/s/AKfycbzPDUjvR34XN0ZSNZ-ot9tY77xHcnA5kxIuJw_lT_8ShoQtm_MGPEGdIBps1RUqfcBt/exec" target="_blank" class="course-btn">
+              📝 説明会に申し込む
+            </a>
+            <p class="course-note">
+              ※ 料金・日程は説明会にてご案内します<br>
+              まずはお気軽にご相談ください😊
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ▲▲▲ 講座②ここまで ▲▲▲ -->
+
+
+    <!-- ▼▼▼ 講座③ リンパケア ▼▼▼ -->
+    <div class="course-card course-card-3 fade-in-up" id="course3">
+      <div class="course-header" onclick="toggleCourse('course3')">
+        <div class="course-num">03</div>
+        <div class="course-title-wrap">
+          <span class="course-label">ボディケア・セラピスト養成</span>
+          <div class="course-name">ヒーリング・リンパケア<br>基礎講座</div>
+          <span class="course-name-en">Healing &amp; Lymph Care Program</span>
+        </div>
+        <div class="course-arrow">▼</div>
+      </div>
+      <div class="course-body">
+        <div class="course-body-inner">
+          <p style="font-size:.86rem;line-height:2.4;color:var(--text);margin-bottom:20px;font-family:'Zen Old Mincho',serif;">
+            「頑張って癒そう」という自我（エゴ）をそっと手放したとき、<br>
+            あなたは宇宙の無限のエネルギーを中継する<strong>「純粋なパイプ（導管）」</strong>になります。<br><br>
+            自分が頑張らないからこそ、受け手は深い解放感を感じ、<br>
+            あなた自身も施術するほどに光で満たされていきます。<br>
+            これがYUTORIGIの癒しの在り方です。
+          </p>
+
+          <h4 style="font-family:'Zen Old Mincho',serif;font-size:.86rem;color:var(--text);margin-bottom:10px;">こんなお悩みありませんか？</h4>
+          <div class="trouble-list">
+            <div class="trouble-item">誰かを癒したいけれど、自分のパワーを使い果たして疲れてしまう</div>
+            <div class="trouble-item">「これでいいの？」と不安になり、自信を持てない</div>
+            <div class="trouble-item">イベントや日常の中で、すぐに使える技術がほしい</div>
+          </div>
+
+          <!-- 3つの柱 -->
+          <h4 style="font-family:'Zen Old Mincho',serif;font-size:.86rem;color:var(--text);margin:20px 0 12px;">🌿 基礎講座の3つの柱</h4>
+          <div class="steps">
+            <div class="step-row">
+              <div class="step-badge">1</div>
+              <p class="step-text"><strong>自己の調和（Inner Harmony）</strong><br>施術しながら自分自身の呼吸を整え、クリアな「光の通り道」になる準備をします。</p>
+            </div>
+            <div class="step-row">
+              <div class="step-badge">2</div>
+              <p class="step-text"><strong>癒しの実践（Practical Care）</strong><br>肩・頭・手に特化した手技。イベントや家庭ですぐに使えます。</p>
+            </div>
+            <div class="step-row">
+              <div class="step-badge">3</div>
+              <p class="step-text"><strong>光の循環（Energy Flow）</strong><br>物理的な滞りとエネルギーの滞りを同時に流すワーク。施術するほど自分も癒されます。</p>
+            </div>
+          </div>
+
+          <!-- 基礎でできること -->
+          <div class="fit-box" style="margin-bottom:16px;">
+            <h4>✅ 基礎講座でできるようになること</h4>
+            <div class="fit-items">
+              <div class="fit-item">🌿 イベントで開催できるお手軽リンパケア</div>
+              <div class="fit-item">🌿 身の回りの人に施術して体感・自信を得る</div>
+              <div class="fit-item">🌿 施術するほど自分も癒される感覚を体験する</div>
+            </div>
+          </div>
+
+          <!-- 次のステップ -->
+          <div style="background:linear-gradient(135deg,var(--sky-pale),#f0f8ef);border-radius:14px;padding:18px 20px;margin-bottom:22px;border:1px solid var(--sky-light);">
+            <h4 style="font-family:'Zen Old Mincho',serif;font-size:.84rem;color:var(--text);margin-bottom:10px;">💫 さらに深めたい方へ（次のステップ）</h4>
+            <p style="font-size:.74rem;color:var(--text-light);margin-bottom:10px;line-height:1.9;">基礎講座修了後、ご希望の方にご案内します</p>
+            <div class="fit-items">
+              <div class="fit-item" style="font-size:.76rem;color:var(--text-light);">🌿 全身リンパケアセラピスト養成（サロン開業向け）</div>
+              <div class="fit-item" style="font-size:.76rem;color:var(--text-light);">🌿 マインドブロック解除（お金を受け取るブレーキを外す）</div>
+              <div class="fit-item" style="font-size:.76rem;color:var(--text-light);">🌿 副業・起業サポート</div>
+            </div>
+          </div>
+
+          <div class="course-cta">
+            <!-- ▼ 説明会フォームのURLができたらここに入れてください ▼ -->
+            <a href="https://script.google.com/macros/s/AKfycbzPDUjvR34XN0ZSNZ-ot9tY77xHcnA5kxIuJw_lT_8ShoQtm_MGPEGdIBps1RUqfcBt/exec" target="_blank" class="course-btn">
+              📝 説明会に申し込む
+            </a>
+            <p class="course-note">
+              ※ 料金・日程は説明会にてご案内します<br>
+              まずはお気軽にご相談ください😊
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ▲▲▲ 講座③ここまで ▲▲▲ -->
+
+  </div>
+</section>
+
+<!-- ══ LINE相談 ══ -->
+<section class="cta-section" id="form-coming">
+  <svg class="leaf-deco" style="top:-8px;right:-20px;width:180px;opacity:.09;transform:rotate(5deg)" viewBox="0 0 160 250">
+    <path d="M80,0 C80,0 145,62 128,155 C111,248 22,260 22,260 C22,260 4,158 46,96 C62,46 80,0 80,0Z" fill="#9aad97"/>
+    <line x1="80" y1="14" x2="60" y2="235" stroke="#7a9877" stroke-width="2" opacity=".6"/>
+  </svg>
+
+  <p class="section-label fade-in-up">Consultation</p>
+  <h2 class="section-title fade-in-up">まずは無料相談へ</h2>
+  <div class="section-line fade-in-up"></div>
+
+  <div class="cta-box fade-in-up">
+    <p>
+      「どの講座が自分に合うか分からない」<br>
+      「まずは話を聞いてみたい」<br><br>
+      <strong>説明会は無料です😊</strong><br>
+      下のボタンからお申し込みいただくか<br>
+      LINEでお気軽にご相談ください。
+    </p>
+    <a href="https://script.google.com/macros/s/AKfycbzPDUjvR34XN0ZSNZ-ot9tY77xHcnA5kxIuJw_lT_8ShoQtm_MGPEGdIBps1RUqfcBt/exec" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#a090c0,#7860b0);color:white;padding:14px 32px;border-radius:50px;font-family:'Noto Serif JP',serif;font-size:.82rem;letter-spacing:.1em;text-decoration:none;box-shadow:0 5px 18px rgba(160,144,192,.35);transition:all .3s;margin-bottom:14px;">
+      📝 無料説明会に申し込む
+    </a>
+    <br>
+    <a href="https://line.me/R/oaMessage/@984nhccu/?講座について相談したいです" class="line-btn" target="_blank">
+      📩 LINEで相談する
+    </a>
+    <p style="font-size:.7rem;color:var(--text-light);margin-top:12px;line-height:2;">
+      ボタンを押すと「講座について相談したいです」が<br>自動入力された状態でLINEが開きます
+    </p>
+  </div>
+</section>
+
+<!-- ══ フッター ══ -->
+<footer>
+  <svg class="leaf-deco" style="top:-5px;left:-10px;width:110px;opacity:.12" viewBox="0 0 160 250">
+    <path d="M80,0 C80,0 145,62 128,155 C111,248 22,260 22,260 C22,260 4,158 46,96 C62,46 80,0 80,0Z" fill="#9aad97"/>
+  </svg>
+  <p class="logo">YUTORIGI</p>
+  <p class="logo-jp">〜 遊 鳥 木 〜</p>
+  <p>ヒーリング ＆ リラクゼーションサロン</p>
+  <p style="margin-top:10px;">
+    サイト：<a href="https://welcometoyutorigi-dotcom.github.io/YUTORIGIzoom/" target="_blank">https://welcometoyutorigi-dotcom.github.io/YUTORIGIzoom/</a>
+  </p>
+  <p style="margin-top:8px;">
+    公式LINE：<a href="https://lin.ee/ZNgeYzl" target="_blank">https://lin.ee/ZNgeYzl</a>
+  </p>
+  <p style="margin-top:12px;font-size:.58rem;opacity:.5;">© YUTORIGI All Rights Reserved.</p>
+</footer>
+
+<script>
+  // アコーディオン開閉
+  function toggleCourse(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+
+  // スクロールアニメーション
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
